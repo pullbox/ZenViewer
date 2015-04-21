@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<head>
+<title>siteHeader test title</title>
+</head>
+<body>
+	<composite:interface>
+
+	</composite:interface>
+
+	<composite:implementation>
+		<h:form>
+			<p:panel>
+				<f:facet name="header">
+					<h:graphicImage name="Pentaho Logo.jpg" library="images"
+						height="40" style="vertical-align: middle;" />
+					<span style="font-size: 200%; vertical-align: middle;">Ticket
+						Review</span>
+				</f:facet>
+
+				<p:menubar>
+					<p:menuitem value="Standards" url="#" icon="fa fa-rss" />
+					<p:menuitem value="Search By Ticket ID" url="SearchByTicketID.jsf"/>
+				</p:menubar>
+			</p:panel>
+		</h:form>
+	</composite:implementation>
+
+</body>
+</html>

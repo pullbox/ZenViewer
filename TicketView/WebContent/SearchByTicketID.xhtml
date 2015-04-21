@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/tr-template.xhtml">
+
+	<ui:define name="content">
+		<p:panel header="Search by Ticket ID" style="">
+			<p:fieldset>
+				<h:form>
+					<p:panelGrid columns="3" cellpadding="1"
+						columnClasses="thirty-percent top-alignment, thirty-percent top-alignment, forty-percent top-alignment ">
+
+
+						<h:outputLabel for="ticketID" value="Ticket ID:" />
+						<p:inputText id="ticketID" value="#{jsfTicket.ticketID}"
+							required="true" label="TicketID"
+							validator="#{myValidator.ticketExists}">
+						</p:inputText>
+						<p:message for="ticketID" />
+
+
+
+						<f:facet name="footer">
+							<h:commandButton value="Search" action="#{jsfTicket.showTicket}" />
+						</f:facet>
+
+					</p:panelGrid>
+
+
+				</h:form>
+			</p:fieldset>
+		</p:panel>
+	</ui:define>
+</ui:composition>
