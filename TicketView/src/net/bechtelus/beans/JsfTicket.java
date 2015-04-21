@@ -42,14 +42,17 @@ public class JsfTicket extends Ticket implements Serializable {
 		this.zenticket = zenticket;
 	}
 
+	@Override
 	public String getDescription() {
 		return zenticket.getDescription();
 	}
 
+	@Override
 	public String getSubject() {
 		return zenticket.getSubject();
 	}
 
+	@Override
 	public Status getStatus() {
 		return zenticket.getStatus();
 	}
@@ -64,6 +67,7 @@ public class JsfTicket extends Ticket implements Serializable {
 		return group.getName();
 	}
 
+	@Override
 	public Date getCreatedAt() {
 		return zenticket.getCreatedAt();
 	}
