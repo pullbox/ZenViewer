@@ -58,3 +58,7 @@ ul.aligned {  /* So if in centered div, the bullets line up under each other */
   display: inline-block;
   text-align: left; 
 }
+
+.commentList td:nth-child(1) {
+    width: 150px;
+}

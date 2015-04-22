@@ -7,14 +7,14 @@ import org.zendesk.client.v2.model.Photo;
 
 public class CommentExtended extends Comment {
 	private SearchTickets search;
+	private Photo photo;
 
-	private String authorName;
-	private String photoURL;
+	private String noPhotoURL = "/resources/images/no_photo.jpg";
 
 	public CommentExtended(SearchTickets stickets, Comment com) {
 		super();
 		this.search = stickets;
-		
+
 		this.setAttachments(com.getAttachments());
 		this.setAuthorId(com.getAuthorId());
 		this.setBody(com.getBody());
@@ -30,30 +30,27 @@ public class CommentExtended extends Comment {
 		return search.getUser(getAuthorId()).getName();
 
 	}
-	
+
 	public void setAuthorName(String name) {
 		this.setAuthorName(name);
 	}
 
 	public String getPhotoURL() {
-		String url = search.getUser(getAuthorId()).getPhoto().getContentUrl();
-		System.out.println(url);
-		
-		if (url.isEmpty()) {
-			return "1";
-		} else  {
-			return url;
+		photo = search.getUser(getAuthorId()).getPhoto();
+		String url;
+		if (photo != null) {
+			url = photo.getContentUrl();
+
+		} else {
+
+			url = noPhotoURL;
 		}
-		
+
+		return url;
+
 	}
 
 	public void setPhotoURL(String photoURL) {
-		this.photoURL = photoURL;
 	}
-
-	
-
-	
-	
 
 }

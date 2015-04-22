@@ -6,69 +6,83 @@
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
-		
-			<p:fieldset>
-				<h:form>
-					<p:panelGrid columns="2">
-						<f:facet name="header">
-							<h:commandButton value="close"
-								action="#{jsfTicket.searchbyticketid}" />
-						</f:facet>
-						<p:outputLabel for="ticketID" value="Ticket ID" />
-						<p:outputLabel id="ticketID" value="#{jsfTicket.ticketID}" />
 
-						<p:outputLabel for="organization" value="Organization" />
-						<p:outputLabel id="organization" value="#{jsfTicket.organization}" />
+		<p:fieldset>
+			<h:form>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:commandButton value="close"
+							action="#{jsfTicket.searchbyticketid}" />
+					</f:facet>
+					<p:outputLabel for="ticketID" value="Ticket ID" />
+					<p:outputLabel id="ticketID" value="#{jsfTicket.ticketID}" />
 
-						<p:outputLabel for="submitter" value="Submitted by" />
-						<p:outputLabel id="submitter" value="#{jsfTicket.submitter}" />
+					<p:outputLabel for="organization" value="Organization" />
+					<p:outputLabel id="organization" value="#{jsfTicket.organization}" />
+
+					<p:outputLabel for="submitter" value="Submitted by" />
+					<p:outputLabel id="submitter" value="#{jsfTicket.submitter}" />
+
+					<p:outputLabel for="status" value="Status" />
+					<p:outputLabel id="status" value="#{jsfTicket.status}" />
 
 
+					<p:outputLabel for="subject" value="Subject" />
+					<p:outputLabel id="subject" value="#{jsfTicket.subject}" />
 
-						<p:outputLabel for="subject" value="Subject" />
-						<p:outputLabel id="subject" value="#{jsfTicket.subject}" />
+					<p:outputLabel for="groupName" value="Group" />
+					<p:outputLabel id="groupName" value="#{jsfTicket.groupName}" />
 
-						<p:outputLabel for="groupName" value="Group" />
-						<p:outputLabel id="groupName" value="#{jsfTicket.groupName}" />
-						
-						<p:outputLabel for="assigneeName" value="Assigned to" />
-						<p:outputLabel id="assigneeName" value="#{jsfTicket.assigneeName}" />
+					<p:outputLabel for="assigneeName" value="Assigned to" />
+					<p:outputLabel id="assigneeName" value="#{jsfTicket.assigneeName}" />
 
-						<p:outputLabel for="description" value="Description" />
-						<p:outputLabel id="description" value="#{jsfTicket.description}" />
+					<p:outputLabel for="description" value="Description" />
+					<p:outputLabel id="description" value="#{jsfTicket.description}" />
 
-						<p:outputLabel for="createdAt" value="Created At" />
-						<p:outputLabel id="createdAt" value="#{jsfTicket.createdAt}" />
+					<p:outputLabel for="createdAt" value="Created At" />
+					<p:outputLabel id="createdAt" value="#{jsfTicket.createdAt}" />
 
-						<p:outputLabel for="updatedAt" value="Updated At" />
-						<p:outputLabel id="updatedAt" value="#{jsfTicket.updatedAt}" />
+					<p:outputLabel for="updatedAt" value="Updated At" />
+					<p:outputLabel id="updatedAt" value="#{jsfTicket.updatedAt}" />
 
-						<p:outputLabel for="requesterName" value="Requester" />
-						<p:outputLabel id="requesterName"
-							value="#{jsfTicket.requesterName}" />
-						<p:outputLabel />
-						<p:outputPanel value="Comment">
-							<p:dataTable value="#{jsfTicket.comments}" var="comment" sortOrder="descending" 
-						>
-								
-								<p:column headerText="Comments">
-									<p:panelGrid columns="6">
-										<p:column  colspan="2">#{comment.createdAt}</p:column>
-										<p:column  colspan="6">#{comment.body}</p:column>
-									</p:panelGrid>
-								</p:column>
+					<p:outputLabel for="requesterName" value="Requester" />
+					<p:outputLabel id="requesterName"
+						value="#{jsfTicket.requesterName}" />
+					<p:outputLabel />
+					<p:outputPanel value="Comment">
+						<p:dataTable value="#{jsfTicket.comments}" var="commentextended"
+							sortOrder="descending" >
 
-							</p:dataTable>
-						</p:outputPanel>
+							<p:column headerText="Comments">
+								<p:panelGrid columns="2">
+									<p:column id="Authorinfo" style="width:30%; text-align:left">
+										<h:outputText value="Posted:  &lt;br/&gt;" escape="false" />
+										<h:outputText value="#{commentextended.createdAt}">
+											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+										</h:outputText>
+										<h:outputText value="&lt;br/&gt;" escape="false" />
+										<p:graphicImage url="#{commentextended.photoURL}" />
 
-						<f:facet name="footer">
-							<h:commandButton value="close"
-								action="#{jsfTicket.searchbyticketid}" />
-						</f:facet>
-					</p:panelGrid>
-				</h:form>
-			</p:fieldset>
-		
+
+									</p:column>
+									<p:column id="commentinfo" style="width:70%">
+										<h:outputText escape="false"
+											value="#{commentextended.html_body}" />
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+
+						</p:dataTable>
+					</p:outputPanel>
+
+					<f:facet name="footer">
+						<h:commandButton value="close"
+							action="#{jsfTicket.searchbyticketid}" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:fieldset>
+
 
 	</ui:define>
 </ui:composition>

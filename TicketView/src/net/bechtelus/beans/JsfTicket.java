@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import net.bechtelus.extended.model.CommentExtended;
 import net.bechtelus.standard.SearchTickets;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ public class JsfTicket extends Ticket implements Serializable {
 
 	private int ticketID;
 	private Ticket zenticket;
-	private List<Comment> comments;
+	private List<CommentExtended> comments;
 	private SearchTickets searchtickets;
 
 	public int getTicketID() {
@@ -57,7 +58,7 @@ public class JsfTicket extends Ticket implements Serializable {
 		return zenticket.getStatus();
 	}
 
-	public List<Comment> getComments() {
+	public List<CommentExtended> getComments() {
 		return comments;
 	}
 

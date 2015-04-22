@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/tr-template.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset>
+			<h:form>
+				
+					<p:outputPanel value="tickets">
+						<p:dataTable value="#{jsfSearchTickets.tickets}" var="ticketextended"
+							sortOrder="descending" >
+
+							<p:column headerText="Ticket">
+								<p:panelGrid columns="2">
+									<p:column id="commentinfo" style="width:100%">
+										<p:outputText value="#{ticketextended.id}" />
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+
+						</p:dataTable>
+					</p:outputPanel>
+
+					
+				</p:panelGrid>
+			</h:form>
+		</p:fieldset>
+
+
+	</ui:define>
+</ui:composition>

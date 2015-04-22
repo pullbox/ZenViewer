@@ -1,14 +1,11 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 import net.bechtelus.common.*;
-import net.bechtelus.standard.MaintainStandard;
 import net.bechtelus.standard.StandardDAO;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
 @ManagedBean
