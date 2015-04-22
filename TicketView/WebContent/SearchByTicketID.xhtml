@@ -15,16 +15,16 @@
 
 						<h:outputLabel for="ticketID" value="Ticket ID:" />
 						<p:inputText id="ticketID" value="#{jsfTicket.ticketID}"
-							required="true" label="TicketID"
+							required="true" label="ticketID"
 							validator="#{myValidator.ticketExists}">
 						</p:inputText>
 						<p:message for="ticketID" />
 
-
-
 						<f:facet name="footer">
 							<h:commandButton value="Search" action="#{jsfTicket.showTicket}" />
 						</f:facet>
+
+
 
 					</p:panelGrid>
 
