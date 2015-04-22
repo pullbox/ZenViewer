@@ -13,15 +13,14 @@
 						columnClasses="thirty-percent top-alignment, thirty-percent top-alignment, forty-percent top-alignment ">
 
 
-						<h:outputLabel for="ticketID" value="Ticket ID:" />
-						<p:inputText id="ticketID" value="#{jsfTicket.ticketID}"
-							required="true" label="ticketID"
-							validator="#{myValidator.ticketExists}">
+						<h:outputLabel for="searchTerm" value="Search: " />
+						<p:inputText id="searchTerm" value="#{jsfSearchTicket.searchTerm}"
+							required="true" label="searchTerm">
 						</p:inputText>
-						<p:message for="ticketID" />
+						<p:message for="searchterm" />
 
 						<f:facet name="footer">
-							<h:commandButton value="Search" action="#{jsfTicket.showTicket}" />
+							<h:commandButton value="Search" action="#{jsfSearchTicket.showSearchResults}" />
 						</f:facet>
 
 
