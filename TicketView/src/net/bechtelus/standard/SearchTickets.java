@@ -28,7 +28,7 @@ public class SearchTickets implements Serializable {
 	private List<CommentExtended> comments;
 	private List<TicketExtended> tickets;
 	private Properties config;
-	private Properties b;
+
 
 	
 	
