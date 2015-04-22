@@ -9,23 +9,31 @@
 		<p:panel header="Search Tickets" style="">
 			<p:fieldset>
 				<h:form>
-					<p:panelGrid columns="3" cellpadding="1"
-						columnClasses="thirty-percent top-alignment, thirty-percent top-alignment, forty-percent top-alignment ">
+					
+					
+							<p:panelGrid columns="3" cellpadding="1"
+								columnClasses="thirty-percent top-alignment, thirty-percent top-alignment, forty-percent top-alignment ">
 
 
-						<h:outputLabel for="searchTerm" value="Search: " />
-						<p:inputText id="searchTerm" value="#{jsfSearchTicket.searchTerm}"
-							required="true" label="searchTerm">
-						</p:inputText>
-						<p:message for="searchterm" />
+								<h:outputLabel for="searchTerm"
+									value="Search: " />
+								<p:inputText id="searchTerm"
+									value="#{jsfSearchTicket.searchTerm}" required="true"
+									label="searchTerm">
+								</p:inputText>
 
-						<f:facet name="footer">
-							<h:commandButton value="Search" action="#{jsfSearchTicket.showSearchResults}" />
-						</f:facet>
+								<p:message for="searchterm" />
+
+								<f:facet name="footer">
+									<h:commandButton value="Search"
+										action="#{jsfSearchTicket.showSearchResults}" />
+								</f:facet>
 
 
 
-					</p:panelGrid>
+							</p:panelGrid>
+				
+
 
 
 				</h:form>
