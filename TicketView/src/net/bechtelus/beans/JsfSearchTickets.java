@@ -18,27 +18,26 @@ import org.zendesk.client.v2.model.Ticket;
 import org.zendesk.client.v2.model.User;
 
 @ManagedBean
-@SessionScoped
 public class JsfSearchTickets  implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989494L;
 
-	private String searchterm;
+	private String searchTerm;
 	private SearchTickets searchtickets;
 	private List<TicketExtended> tickets;
 
 	
-	public String getSearchterm() {
-		return searchterm;
+	public String getSearchTerm() {
+		return searchTerm;
 	}
 
-	public void setSearchterm(String searchterm) {
-		this.searchterm = searchterm;
+	public void setSearchTerm(String searchterm) {
+		this.searchTerm = searchterm;
 	}
 
 	public String showSearchResults() {
-		if (!searchterm.isEmpty()) {
-			tickets = searchtickets.getTickets(searchterm);
+		if (!searchTerm.isEmpty()) {
+			tickets = searchtickets.getTickets(searchTerm);
 		
 		}
 		return ("DspResult"); // Means to go to page-b.xhtml (since condition
