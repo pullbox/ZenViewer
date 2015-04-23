@@ -1,19 +1,21 @@
 package net.bechtelus.extended.model;
 
+import net.bechtelus.standard.APIAccessObject;
 import net.bechtelus.standard.SearchTickets;
 
+import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Comment;
 import org.zendesk.client.v2.model.Photo;
 
 public class CommentExtended extends Comment {
-	private SearchTickets search;
 	private Photo photo;
+	private static Zendesk zd;
 
 	private String noPhotoURL = "/resources/images/no_photo.jpg";
 
-	public CommentExtended(SearchTickets stickets, Comment com) {
+	public CommentExtended(Comment com) {
 		super();
-		this.search = stickets;
+		zd = APIAccessObject.getAPIAccessObject();
 
 		this.setAttachments(com.getAttachments());
 		this.setAuthorId(com.getAuthorId());
@@ -27,16 +29,16 @@ public class CommentExtended extends Comment {
 	}
 
 	public String getAuthorName() {
-		return search.getUser(getAuthorId()).getName();
-
-	}
+		return zd.getUser(getAuthorId()).getName();
+		}
 
 	public void setAuthorName(String name) {
 		this.setAuthorName(name);
 	}
 
 	public String getPhotoURL() {
-		photo = search.getUser(getAuthorId()).getPhoto();
+		photo = null;
+		photo = zd.getUser(getAuthorId()).getPhoto();
 		String url;
 		if (photo != null) {
 			url = photo.getContentUrl();

@@ -5,27 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 import net.bechtelus.extended.model.CommentExtended;
-import net.bechtelus.standard.SearchTickets;
+import net.bechtelus.extended.model.TicketExtended;
+import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
-import org.zendesk.client.v2.model.Comment;
-import org.zendesk.client.v2.model.Group;
+import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
-import org.zendesk.client.v2.model.User;
 
 @ManagedBean
-@SessionScoped
 public class JsfTicket extends Ticket implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989494L;
-
+	private static Zendesk zd;
 	private int ticketID;
-	private Ticket zenticket;
+	private Ticket aticket;
+	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
-	private SearchTickets searchtickets;
 
 	public int getTicketID() {
 		return ticketID;
@@ -33,14 +31,6 @@ public class JsfTicket extends Ticket implements Serializable {
 
 	public void setTicketID(int ticketID) {
 		this.ticketID = ticketID;
-	}
-
-	public Ticket getZenticket() {
-		return zenticket;
-	}
-
-	public void setZenticket(Ticket zenticket) {
-		this.zenticket = zenticket;
 	}
 
 	@Override
@@ -63,9 +53,7 @@ public class JsfTicket extends Ticket implements Serializable {
 	}
 
 	public String getGroupName() {
-		long id = zenticket.getGroupId();
-		Group group = searchtickets.getGroup(id);
-		return group.getName();
+		return zenticket.getGroupName();
 	}
 
 	@Override
@@ -78,32 +66,29 @@ public class JsfTicket extends Ticket implements Serializable {
 	}
 
 	public String getOrganization() {
-		long id = zenticket.getOrganizationId();
-		return searchtickets.getOrganization(id).getName();
-
+		return zenticket.getOrganizationName();
 	}
 
 	public String getsubmitter() {
-		long id = zenticket.getSubmitterId();
-		return searchtickets.getUser(id).getName();
+		return zenticket.getsubmitterName();
 	}
 
 	public String getRequesterName() {
-		long id = zenticket.getRequesterId();
-		User user = searchtickets.getUser(id);
-		return user.getName();
+		return zenticket.getRequesterName();
 	}
 
 	public String getAssigneeName() {
-		long id = zenticket.getAssigneeId();
-		User user = searchtickets.getUser(id);
-		return user.getName();
+		return zenticket.getAssigneeName();
 	}
-
+	
 	public String showTicket() {
 		if (ticketID != 0) {
-			zenticket = searchtickets.getTicket(ticketID);
-			comments = searchtickets.getComments(ticketID);
+			aticket = null;
+			zenticket = null;
+			comments = null;
+			aticket = zd.getTicket(ticketID);
+			zenticket = new TicketExtended(aticket);
+			comments = zenticket.getComments();
 		}
 		return ("DspTicket"); // Means to go to page-b.xhtml (since condition
 								// is not mapped in faces-config.xml)
@@ -123,10 +108,9 @@ public class JsfTicket extends Ticket implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		if (searchtickets != null) {
-		} else {
-			searchtickets = new SearchTickets();
-		}
+
+		zd = APIAccessObject.getAPIAccessObject();
+
 	}
 
 }

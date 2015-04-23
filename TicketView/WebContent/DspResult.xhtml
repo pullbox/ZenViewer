@@ -9,23 +9,34 @@
 
 		<p:fieldset>
 			<h:form>
-				
-					<p:outputPanel value="tickets">
-						<p:dataTable value="#{jsfSearchTickets.tickets}" var="ticketextended"
-							sortOrder="descending" >
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:commandButton value="close"
+							action="#{jsfSearchTicket.searchbyticketid}" />
+					</f:facet>
 
-							<p:column headerText="Ticket">
-								<p:panelGrid columns="2">
-									<p:column id="commentinfo" style="width:100%">
-										<p:outputText value="#{ticketextended.id}" />
-									</p:column>
-								</p:panelGrid>
-							</p:column>
+					<h:outputText value="#{jsfSearchTicket.tickets}" />
 
-						</p:dataTable>
-					</p:outputPanel>
+					<p:dataTable value="#{jsfSearchTicket.tickets}"
+						var="ticketextended">
 
-					
+						<p:column headerText="Ticket">
+							<p:panelGrid columns="1">
+								<p:column id="Authorinfo" style="width:30%; text-align:left">
+									<h:outputText value="Posted:  &lt;br/&gt;" escape="false" />
+									<h:outputText value="#{ticketextended.subject}" />
+									<h:outputText value="&lt;br/&gt;" escape="false" />
+
+								</p:column>
+
+							</p:panelGrid>
+						</p:column>
+
+					</p:dataTable>
+					<f:facet name="footer">
+						<h:commandButton value="close"
+							action="#{jsfSearchTicket.searchbyticketid}" />
+					</f:facet>
 				</p:panelGrid>
 			</h:form>
 		</p:fieldset>

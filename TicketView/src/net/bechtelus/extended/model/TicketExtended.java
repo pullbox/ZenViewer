@@ -1,17 +1,25 @@
 package net.bechtelus.extended.model;
 
-import net.bechtelus.standard.SearchTickets;
+import java.util.ArrayList;
+import java.util.List;
 
+import net.bechtelus.standard.APIAccessObject;
+
+import org.zendesk.client.v2.Zendesk;
+import org.zendesk.client.v2.model.Comment;
+import org.zendesk.client.v2.model.Group;
 import org.zendesk.client.v2.model.Ticket;
+import org.zendesk.client.v2.model.User;
 
 public class TicketExtended extends Ticket {
-	private SearchTickets search;
+	private static Zendesk zd;
+	private static List<CommentExtended> comments;
 
 
-
-	public TicketExtended(SearchTickets stickets, Ticket t) {
+	public TicketExtended(Ticket t) {
 		super();
-		this.search = stickets;
+
+		zd = APIAccessObject.getAPIAccessObject();
 
 		
 		this.setAssigneeId(t.getAssigneeId());
@@ -49,5 +57,50 @@ public class TicketExtended extends Ticket {
 		this.setVia(t.getVia());
 
 	}
+
+	
+	
+	public String getOrganizationName() {
+		long id = this.getOrganizationId();
+		return zd.getOrganization(id).getName();
+
+	}
+	
+	public String getGroupName() {
+		long id = getGroupId();
+		Group group = zd.getGroup(id);
+		return group.getName();
+	}
+
+	public String getsubmitterName() {
+		long id = getSubmitterId();
+		return zd.getUser(id).getName();
+	}
+
+	public String getRequesterName() {
+		long id = getRequesterId();
+		User user = zd.getUser(id);
+		return user.getName();
+	}
+
+	public String getAssigneeName() {
+		long id = getAssigneeId();
+		User user = zd.getUser(id);
+		return user.getName();
+	}
+	
+	public  List<CommentExtended> getComments() {
+		comments = null;
+		comments = new ArrayList<CommentExtended>();
+		for (Comment comment : zd.getTicketComments(this.id)) {
+			// System.out.println("Body: " + comment.getBody());
+			CommentExtended commentext = null;
+			commentext = new CommentExtended(comment);
+			comments.add(commentext);
+		}
+
+		return comments;
+	}
+	
 	
 }
