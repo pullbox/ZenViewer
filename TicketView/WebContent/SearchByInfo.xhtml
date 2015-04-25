@@ -10,19 +10,23 @@
 		<p:panel header="Search Tickets" style="">
 
 			<h:form>
-				<p:panelGrid columns="3" cellpadding="1">
-					<h:outputLabel for="searchTerm" value="Search Term: " />
-					<p:inputText id="searchTerm" value="#{jsfSearchByInfo.searchTerm}"
-						required="true" label="searchTerm">
-					</p:inputText>
+				<div align="center">
+					<p:panelGrid columns="2" cellpadding="1">
+						<h:outputLabel for="searchTerm" value="Search Term: " />
+						<p:inputText id="searchTerm" value="#{jsfSearchByInfo.searchTerm}"
+							required="true" label="searchTerm">
+						</p:inputText>
 
-					<p:message for="searchTerm" />
+						<p:message for="searchTerm" />
 
-					<f:facet name="footer">
-						<h:commandButton value="Search"
-							action="#{jsfSearchByInfo.showSearchResults}" />
-					</f:facet>
-				</p:panelGrid>
+						<f:facet name="footer">
+							<div align="center">
+								<h:commandButton value="Search"
+									action="#{jsfSearchByInfo.showSearchResults}" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
 			</h:form>
 
 		</p:panel>

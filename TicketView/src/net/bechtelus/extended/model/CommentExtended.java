@@ -1,8 +1,6 @@
 package net.bechtelus.extended.model;
 
 import net.bechtelus.standard.APIAccessObject;
-import net.bechtelus.standard.SearchTickets;
-
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Comment;
 import org.zendesk.client.v2.model.Photo;

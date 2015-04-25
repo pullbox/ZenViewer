@@ -12,9 +12,10 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Ticket;
 
-import net.bechtelus.standard.SearchTickets;
+import net.bechtelus.standard.APIAccessObject;
 
 @FacesValidator("net.bechtelus.MyValidator")
 @ManagedBean
@@ -22,13 +23,13 @@ import net.bechtelus.standard.SearchTickets;
 public class MyValidator implements Validator, Serializable {
 	private static final long serialVersionUID = 7778841766245989494L;
 	
-	private SearchTickets searchtickets;
+	private static Zendesk zd;
 
 	public void ticketExists(FacesContext context,
 			UIComponent componentToValidate, Object value)
 			throws ValidatorException {
 
-		Ticket ticket = searchtickets.getTicket((Integer) value);
+		Ticket ticket = zd.getTicket((Integer) value);
 		if (ticket != null) {
 		} else {
 			FacesMessage msg = new FacesMessage("The Zendesk Ticket ID does not exist!");
@@ -48,10 +49,7 @@ public class MyValidator implements Validator, Serializable {
 	
 	@PostConstruct
 	public void init() {
-		if (searchtickets != null) {
-		} else {
-			searchtickets = new SearchTickets();
-		}
+		zd = APIAccessObject.getAPIAccessObject();
 	}
 
 
