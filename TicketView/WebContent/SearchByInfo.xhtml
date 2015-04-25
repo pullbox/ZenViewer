@@ -2,38 +2,39 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
 		<p:panel header="Search Tickets" style="">
-			<p:fieldset>
-				<h:form>
-					<p:panelGrid columns="3" cellpadding="1"
-						columnClasses="thirty-percent top-alignment, thirty-percent top-alignment, forty-percent top-alignment ">
+
+			<h:form>
+				<p:panelGrid columns="3" cellpadding="1">
 
 
-						<h:outputLabel for="searchTerm" value="Search Term: " />
-						<p:inputText id="searchTerm" value="#{jsfSearchTickets.searchTerm}"
-							required="true" label="searchTerm">
-						</p:inputText>
+					<h:outputLabel for="searchTerm" value="Search Term: " />
+					<p:inputText id="searchTerm" value="#{jsfSearchByInfo.searchTerm}"
+						required="true" label="searchTerm">
+					</p:inputText>
 
-						<p:message for="searchTerm" />
+					<p:message for="searchTerm" />
 
-						<f:facet name="footer">
-							<h:commandButton value="Search"
-								action="#{jsfSearchTickets.showSearchResults}" />
-						</f:facet>
-
-
-
-					</p:panelGrid>
+					<f:facet name="footer">
+						<h:commandButton value="Search"
+							action="#{jsfSearchByInfo.showSearchResults}" />
+					</f:facet>
 
 
 
+				</p:panelGrid>
 
-				</h:form>
-			</p:fieldset>
+
+
+
+			</h:form>
+
 		</p:panel>
 	</ui:define>
 </ui:composition>

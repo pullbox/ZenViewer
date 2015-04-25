@@ -3,43 +3,41 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
 
-		<p:fieldset>
+		
 			<h:form>
-				<p:panelGrid columns="2">
+			<h:outputText value="#{jsfSearchTicket.searchTerm}" />
+			<p:outputLabel value="${jsfSearchTicket.tickets}" />
+			
+			
+ 				<p:dataList value="#{jsfSearchTicket.tickets}" var="extendedticket">
 					<f:facet name="header">
 						<h:commandButton value="close"
-							action="#{jsfSearchTicket.searchbyticketid}" />
+							action="#{jsfSearchTicket.searchbyinfo}" />
 					</f:facet>
 
-					<h:outputText value="#{jsfSearchTicket.tickets}" />
+					#{extendedticket.subject}
+					
+					</p:dataList>
+					
+					
+					
+					
+					
 
-					<p:dataTable value="#{jsfSearchTicket.tickets}"
-						var="ticketextended">
-
-						<p:column headerText="Ticket">
-							<p:panelGrid columns="1">
-								<p:column id="Authorinfo" style="width:30%; text-align:left">
-									<h:outputText value="Posted:  &lt;br/&gt;" escape="false" />
-									<h:outputText value="#{ticketextended.subject}" />
-									<h:outputText value="&lt;br/&gt;" escape="false" />
-
-								</p:column>
-
-							</p:panelGrid>
-						</p:column>
-
-					</p:dataTable>
+					
 					<f:facet name="footer">
 						<h:commandButton value="close"
-							action="#{jsfSearchTicket.searchbyticketid}" />
+							action="#{jsfSearchTicket.searchbyinfo}" />
 					</f:facet>
-				</p:panelGrid>
+				
 			</h:form>
-		</p:fieldset>
+	
 
 
 	</ui:define>
