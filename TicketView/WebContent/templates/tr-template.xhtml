@@ -4,13 +4,16 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils">
 
 
 <h:head>
+	<link rel="stylesheet"
+		href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap-theme.min.css" />
 	<title><ui:insert name="page-title">Default Page title</ui:insert>
 	</title>
 
@@ -18,14 +21,21 @@
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="130" resizable="false"
+		<p:layoutUnit position="north" size="140" resizable="false"
 			closable="false" collapsible="false">
-			<utils:siteHeader/>
+			<utils:siteHeader />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="south" size="100" header="bottom"
+		<p:layoutUnit id="template-bottom" position="south" size="100"
 			resizable="true" closable="false" collapsible="false">
-			<h:outputText value="Bottom info"></h:outputText>
+
+			<f:facet name="header">
+				<div align="center">
+					<h:graphicImage name="Hitachi-Data-Systems.png" library="images"
+						height="80" style="vertical-align: middle;" />
+				</div>
+			</f:facet>
+
 		</p:layoutUnit>
 
 
@@ -41,6 +51,8 @@
 
 
 
-
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
 </h:body>
 </html>
