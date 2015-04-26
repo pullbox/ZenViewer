@@ -7,25 +7,29 @@
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
-		<p:panel header="Search Tickets" style="">
+		<p:panel>
 
 			<h:form>
 				<div align="center">
-					<p:panelGrid columns="2" cellpadding="1">
-						<h:outputLabel for="searchTerm" value="Search Term: " />
-						<p:inputText id="searchTerm" value="#{jsfSearchByInfo.searchTerm}"
-							required="true" label="searchTerm">
-						</p:inputText>
+					<p:message for="searchTerm" />
+					<h:panelGrid columns="2" cellpadding="1">
+						<div id="search group">
+							<span class="input-group-addon"><i
+								class="fa fa-search fa-2x"></i></span>
+							<p:inputText id="searchTerm"
+								value="#{jsfSearchByInfo.searchTerm}" required="true"
+								label="searchTerm" placeholder="Search Term">
+							</p:inputText>
+							<p:message for="searchTerm" />
 
-						<p:message for="searchTerm" />
-
+						</div>
 						<f:facet name="footer">
 							<div align="center">
 								<h:commandButton value="Search"
 									action="#{jsfSearchByInfo.showSearchResults}" />
 							</div>
 						</f:facet>
-					</p:panelGrid>
+					</h:panelGrid>
 				</div>
 			</h:form>
 
