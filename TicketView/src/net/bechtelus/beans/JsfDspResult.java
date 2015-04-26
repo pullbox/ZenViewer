@@ -36,6 +36,12 @@ public class JsfDspResult implements Serializable {
 		return tickets;
 	}
 
+	
+	public String setSelectedTicket(Ticket selectedTicket) {
+		Faces.setSessionAttribute("ticketID", selectedTicket.getId());
+	return ("DspTicket");
+}
+	
 
 	public String someOtherActionControllerMethod() {
 		return ("SearchByInfo"); // Means to go to index.xhtml (since
