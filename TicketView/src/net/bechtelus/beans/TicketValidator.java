@@ -1,6 +1,8 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -22,22 +24,35 @@ import net.bechtelus.standard.APIAccessObject;
 @SessionScoped
 public class TicketValidator implements Validator, Serializable {
 	private static final long serialVersionUID = 7778841766245989494L;
-	
+	private static final String ticket_pattern = "^[0-9]{5,6}$";
 	private static Zendesk zd;
+	private Matcher matcher;
+	private Pattern pattern;
 
 	public void ticketExists(FacesContext context,
 			UIComponent componentToValidate, Object value)
 			throws ValidatorException {
+		pattern = Pattern.compile(ticket_pattern);
+		matcher = pattern.matcher(value.toString());
 
-		Ticket ticket = zd.getTicket((Integer) value);
-		if (ticket != null) {
-		} else {
-			FacesMessage msg = new FacesMessage("The Zendesk Ticket ID does not exist!");
+		if (!matcher.matches()) {
+			FacesMessage msg = new FacesMessage(
+					"Ticket ID is a 5 to 6 digit numeric number!");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
+
 		
-		
+		int id = Integer.parseInt((String) value);
+		Ticket ticket = zd.getTicket(id);
+		if (ticket != null) {
+		} else {
+			FacesMessage msg = new FacesMessage(
+					"The Zendesk Ticket ID does not exist!");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			throw new ValidatorException(msg);
+		}
+
 	}
 
 	@Override
@@ -46,11 +61,11 @@ public class TicketValidator implements Validator, Serializable {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		zd = APIAccessObject.getAPIAccessObject();
-	}
 
+	}
 
 }
