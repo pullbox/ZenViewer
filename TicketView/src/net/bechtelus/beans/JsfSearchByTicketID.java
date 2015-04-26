@@ -33,7 +33,7 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 
 	public String showTicket() {
 		if (!ticketID.isEmpty()) {
-			Faces.setSessionAttribute("ticketID", ticketID);
+			Faces.setSessionAttribute("ticketID", Integer.parseInt(ticketID));
 		}
 		return ("DspTicket"); // Means to go to page-b.xhtml (since condition
 								// is not mapped in faces-config.xml)
