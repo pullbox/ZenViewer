@@ -66,6 +66,7 @@ public class TicketExtended extends Ticket {
 
 	}
 	
+		
 	public String getGroupName() {
 		long id = getGroupId();
 		Group group = zd.getGroup(id);
