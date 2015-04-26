@@ -17,7 +17,7 @@
 							class="fa fa-search fa-2x"></i></span>
 						<p:inputText id="ticketID" value="#{jsfSearchByTicketID.ticketID}"
 							required="true" label="ticketID"
-							validator="#{myValidator.ticketExists}" placeholder="Ticket ID">
+							validator="#{ticketValidator.ticketExists}" placeholder="Ticket ID">
 						</p:inputText>
 						<p:message for="ticketID" />
 
