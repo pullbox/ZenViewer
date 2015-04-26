@@ -1,19 +1,10 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
-import net.bechtelus.extended.model.CommentExtended;
-import net.bechtelus.extended.model.TicketExtended;
-import net.bechtelus.standard.APIAccessObject;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
 import org.omnifaces.util.Faces;
-import org.zendesk.client.v2.Zendesk;
-import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
 
 @ManagedBean
