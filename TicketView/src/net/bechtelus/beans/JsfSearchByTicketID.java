@@ -31,7 +31,7 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 		this.ticketID = ticketid;
 	}
 
-	public String showSearchResults() {
+	public String showTicket() {
 		if (!ticketID.isEmpty()) {
 			Faces.setSessionAttribute("ticketID", ticketID);
 		}
