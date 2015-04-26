@@ -21,9 +21,21 @@
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="140" resizable="false"
+		<p:layoutUnit position="north" size="100" resizable="false"
 			closable="false" collapsible="false">
-			<utils:siteHeader />
+
+			<f:facet name="header">
+				<h:graphicImage name="Pentaho logo.png" library="images" height="50"
+					style="vertical-align: middle;" />
+				<span style="font-size: 180%; vertical-align: middle;">Ticket
+					Viewer</span>
+
+
+				<div align="left">
+					<p:button value="Search Tickets" outcome="SearchByInfo" />
+					<p:button value="Show Ticket" outcome="SearchByTicketID" />
+				</div>
+			</f:facet>
 		</p:layoutUnit>
 
 		<p:layoutUnit id="template-bottom" position="south" size="100"
