@@ -14,45 +14,45 @@
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h:commandButton value="close"
-							action="#{jsfTicket.searchbyticketid}" />
+							action="#{jsfDspTicket.searchbyticketid}" />
 					</f:facet>
 					<p:outputLabel for="ticketID" value="Ticket ID" />
-					<p:outputLabel id="ticketID" value="#{jsfTicket.ticketID}" />
+					<p:outputLabel id="ticketID" value="#{jsfDspTicket.ticketID}" />
 
 					<p:outputLabel for="organization" value="Organization" />
-					<p:outputLabel id="organization" value="#{jsfTicket.organization}" />
+					<p:outputLabel id="organization" value="#{jsfDspTicket.organization}" />
 
 					<p:outputLabel for="submitter" value="Submitted by" />
-					<p:outputLabel id="submitter" value="#{jsfTicket.submitter}" />
+					<p:outputLabel id="submitter" value="#{jsfDspTicket.submitter}" />
 
 					<p:outputLabel for="status" value="Status" />
-					<p:outputLabel id="status" value="#{jsfTicket.status}" />
+					<p:outputLabel id="status" value="#{jsfDspTicket.status}" />
 
 
 					<p:outputLabel for="subject" value="Subject" />
-					<p:outputLabel id="subject" value="#{jsfTicket.subject}" />
+					<p:outputLabel id="subject" value="#{jsfDspTicket.subject}" />
 
 					<p:outputLabel for="groupName" value="Group" />
-					<p:outputLabel id="groupName" value="#{jsfTicket.groupName}" />
+					<p:outputLabel id="groupName" value="#{jsfDspTicket.groupName}" />
 
 					<p:outputLabel for="assigneeName" value="Assigned to" />
-					<p:outputLabel id="assigneeName" value="#{jsfTicket.assigneeName}" />
+					<p:outputLabel id="assigneeName" value="#{jsfDspTicket.assigneeName}" />
 
 					<p:outputLabel for="description" value="Description" />
-					<p:outputLabel id="description" value="#{jsfTicket.description}" />
+					<p:outputLabel id="description" value="#{jsfDspTicket.description}" />
 
 					<p:outputLabel for="createdAt" value="Created At" />
-					<p:outputLabel id="createdAt" value="#{jsfTicket.createdAt}" />
+					<p:outputLabel id="createdAt" value="#{jsfDspTicket.createdAt}" />
 
 					<p:outputLabel for="updatedAt" value="Updated At" />
-					<p:outputLabel id="updatedAt" value="#{jsfTicket.updatedAt}" />
+					<p:outputLabel id="updatedAt" value="#{jsfDspTicket.updatedAt}" />
 
 					<p:outputLabel for="requesterName" value="Requester" />
 					<p:outputLabel id="requesterName"
-						value="#{jsfTicket.requesterName}" />
+						value="#{jsfDspTicket.requesterName}" />
 					<p:outputLabel />
 					<p:outputPanel value="Comment">
-						<p:dataTable value="#{jsfTicket.comments}" var="commentextended"
+						<p:dataTable value="#{jsfDspTicket.comments}" var="commentextended"
 							sortOrder="descending" >
 
 							<p:column headerText="Comments">
@@ -79,7 +79,7 @@
 
 					<f:facet name="footer">
 						<h:commandButton value="close"
-							action="#{jsfTicket.searchbyticketid}" />
+							action="#{jsfDspTicket.searchbyticketid}" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
