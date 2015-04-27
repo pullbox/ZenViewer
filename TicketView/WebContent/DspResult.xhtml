@@ -8,33 +8,30 @@
 
 	<ui:define name="content">
 
-		<h:form id="TicketListForm">
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
 			<p:dataTable var="ticketextended" value="#{jsfDspResult.tickets}"
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
-				rowKey="#{ticketextended.id}">>
-				<p:column style="margin-bottom:50px">
-					<p:panelGrid>
-
-						<p:row>
-							<p:column colspan="10">
-								<h:outputText value="#{ticketextended.subject}" />
-							</p:column>
-						</p:row>
-						<p:row>
-							<p:column colspan="1">
-								<h:outputText value="#{ticketextended.id}" />
-							</p:column>
-							<p:column colspan="2">
-								<h:outputText value="#{ticketextended.status}" />
-							</p:column>
-							<p:column colspan="7">
-								<h:outputText value="#{ticketextended.organizationName}" />
-
-							</p:column>
-						</p:row>
-
-					</p:panelGrid>
+				rowSelectListener="#{jsfDspResult.onRowSelectNavigate}"
+				rowKey="#{ticketextended.id}"
+				dblClickSelect="true">
+				
+		
+				
+				<p:column colspan="1"  style="text-align:center">
+					<h:outputText value="#{ticketextended.id}" />
 				</p:column>
+				<p:column colspan="1"   style="text-align:center">
+					<h:outputText value="#{ticketextended.status}" />
+				</p:column>
+				<p:column colspan="2"  >
+					<h:outputText value="#{ticketextended.organizationName}" />
+				</p:column>
+				<p:column colspan="8" >
+					<h:outputText value="#{ticketextended.subject}" />
+				</p:column>
+
+			
 			</p:dataTable>
 		</h:form>
 	</ui:define>
