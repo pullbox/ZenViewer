@@ -8,54 +8,34 @@
 
 	<ui:define name="content">
 
+		<h:form id="TicketListForm">
+			<p:dataTable var="ticketextended" value="#{jsfDspResult.tickets}"
+				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
+				rowKey="#{ticketextended.id}">>
+				<p:column style="margin-bottom:50px">
+					<p:panelGrid>
 
-		<h:form>
+						<p:row>
+							<p:column colspan="10">
+								<h:outputText value="#{ticketextended.subject}" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column colspan="1">
+								<h:outputText value="#{ticketextended.id}" />
+							</p:column>
+							<p:column colspan="2">
+								<h:outputText value="#{ticketextended.status}" />
+							</p:column>
+							<p:column colspan="7">
+								<h:outputText value="#{ticketextended.organizationName}" />
 
+							</p:column>
+						</p:row>
 
-			<p:dataScroller value="#{jsfDspResult.tickets}" var="extendedticket"
-				chunkSize="10" mode="inline">
-				<f:facet name="header">
-					<h:commandButton value="close"
-						action="#{jsfDspResult.searchbyinfo}" />
-				</f:facet>
-
-
-				<p:panel id="line">
-					<div class="ui-grid">
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-1"></div>
-							<div class="ui-grid-col-6">
-								<h:outputText value="#{extendedticket.subject}" />
-							</div>
-							<div class="ui-grid-col-5">
-								<h:outputText value="#{extendedticket.status}" />
-							</div>
-						</div>
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-1"></div>
-							<div class="ui-grid-col-6">
-								<h:outputText value="#{extendedticket.organizationName}" />
-							</div>
-							<div class="ui-grid-col-5">
-								<h:outputText value="#{extendedticket.id}" />
-							</div>
-						</div>
-					</div>
-
-				</p:panel>
-
-
-			</p:dataScroller>
-
-
-
-
-			<f:facet name="footer">
-				<h:commandButton value="close" action="#{jsfDspResult.searchbyinfo}" />
-			</f:facet>
+					</p:panelGrid>
+				</p:column>
+			</p:dataTable>
 		</h:form>
-
-
-
 	</ui:define>
 </ui:composition>
