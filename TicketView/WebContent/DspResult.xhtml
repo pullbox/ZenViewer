@@ -12,11 +12,10 @@
 			<p:growl id="msgs" showDetail="true" />
 			<p:dataTable var="ticketextended" value="#{jsfDspResult.tickets}"
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
-				rowSelectListener="#{jsfDspResult.onRowSelectNavigate}"
 				rowKey="#{ticketextended.id}"
 				dblClickSelect="true">
 				
-		
+		<p:ajax event="rowSelect" listener="#{jsfDspResult.onRowSelect}" />  
 				
 				<p:column colspan="1"  style="text-align:center">
 					<h:outputText value="#{ticketextended.id}" />
