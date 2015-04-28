@@ -2,8 +2,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:of="http://omnifaces.org/functions"
 	template="/templates/tr-template.xhtml">
 
@@ -20,7 +19,8 @@
 					<p:outputLabel id="ticketID" value="#{jsfDspTicket.ticketID}" />
 
 					<p:outputLabel for="organization" value="Organization" />
-					<p:outputLabel id="organization" value="#{jsfDspTicket.organization}" />
+					<p:outputLabel id="organization"
+						value="#{jsfDspTicket.organization}" />
 
 					<p:outputLabel for="submitter" value="Submitted by" />
 					<p:outputLabel id="submitter" value="#{jsfDspTicket.submitter}" />
@@ -36,43 +36,55 @@
 					<p:outputLabel id="groupName" value="#{jsfDspTicket.groupName}" />
 
 					<p:outputLabel for="assigneeName" value="Assigned to" />
-					<p:outputLabel id="assigneeName" value="#{jsfDspTicket.assigneeName}" />
+					<p:outputLabel id="assigneeName"
+						value="#{jsfDspTicket.assigneeName}" />
 
 					<p:outputLabel for="description" value="Description" />
-					<p:outputLabel id="description" value="#{jsfDspTicket.description}" />
+					<p:outputLabel id="description"
+						value="#{jsfDspTicket.firstComment}" escape="false" />
 
 					<p:outputLabel for="createdAt" value="Created At" />
 					<p:outputLabel id="createdAt" value="#{jsfDspTicket.createdAt}" />
 
-					<p:outputLabel for="updatedAt" value="Updated At" />
-					<p:outputLabel id="updatedAt" value="#{jsfDspTicket.updatedAt}" />
+
+
 
 					<p:outputLabel for="requesterName" value="Requester" />
 					<p:outputLabel id="requesterName"
 						value="#{jsfDspTicket.requesterName}" />
 					<p:outputLabel />
 					<p:outputPanel value="Comment">
-						<p:dataTable value="#{jsfDspTicket.comments}" var="commentextended"
-							sortOrder="descending" >
+						<p:dataTable id="listComments" value="#{jsfDspTicket.comments}"
+							var="commentextended" sortOrder="descending"
+							rowstyleclass="#{commentextended.publicStatement eq 'Public'  ? null : '.privatecomment'}">
 
-							<p:column headerText="Comments">
-								<p:panelGrid columns="2">
-									<p:column id="Authorinfo" style="width:30%; text-align:left">
-										<h:outputText value="Posted:  &lt;br/&gt;" escape="false" />
-										<h:outputText value="#{commentextended.createdAt}">
-											<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
-										</h:outputText>
-										<h:outputText value="&lt;br/&gt;" escape="false" />
-										<p:graphicImage url="#{commentextended.photoURL}" />
+							<f:facet name="header">
+								<h:outputText value="Comments" />
+							</f:facet>
 
-
-									</p:column>
-									<p:column id="commentinfo" style="width:70%">
-										<h:outputText escape="false"
-											value="#{commentextended.html_body}" />
-									</p:column>
-								</p:panelGrid>
+							<p:column id="Authorinfo">
+								<h:outputText value="Posted:  &lt;br/&gt;" escape="false" />
+								<h:outputText value="#{commentextended.createdAt}">
+									<f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+								</h:outputText>
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+								<p:graphicImage url="#{commentextended.photoURL}" />
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+								<h:outputText value="#{commentextended.authorName}" />
 							</p:column>
+
+
+							<p:column id="commentinfo" style="width:80%; vertical-align:top">
+
+								<h:outputText value="#{commentextended.publicStatement}"
+									style="font-size: 12px" />
+
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+								<h:outputText escape="false"
+									value="#{commentextended.html_body}" />
+							</p:column>
+
+
 
 						</p:dataTable>
 					</p:outputPanel>
