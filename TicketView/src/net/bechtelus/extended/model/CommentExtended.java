@@ -1,6 +1,7 @@
 package net.bechtelus.extended.model;
 
 import net.bechtelus.standard.APIAccessObject;
+
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Comment;
 import org.zendesk.client.v2.model.Photo;
@@ -32,6 +33,14 @@ public class CommentExtended extends Comment {
 
 	public void setAuthorName(String name) {
 		this.setAuthorName(name);
+	}
+	public String getPublicStatement() {
+		if (isPublic()) {
+			return "Public";
+		} else {
+			return "Private";	
+		}
+		
 	}
 
 	public String getPhotoURL() {
