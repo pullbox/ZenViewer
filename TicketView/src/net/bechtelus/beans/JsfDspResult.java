@@ -8,8 +8,10 @@ import net.bechtelus.extended.model.TicketExtended;
 import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Faces;
@@ -67,12 +69,23 @@ public class JsfDspResult  implements  Serializable {
  */
     
 
-    public String onRowSelectNavigate(SelectEvent event) {  
+    public void onRowSelect(SelectEvent event) {  
     	Long id = ((TicketExtended) event.getObject()).getId();
     	Faces.setSessionAttribute("ticketID", id);
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedTicket",event.getObject());  
-  
-        return "dspTicket?faces-redirect=true";  
+    	
+    	   	
+    	 Flash flash=FacesContext.getCurrentInstance().getExternalContext().getFlash();
+    	  flash.put("ticketID",selectedTicket.getId().toString());
+
+
+    	 ConfigurableNavigationHandler configurableNavigationHandler =
+                 (ConfigurableNavigationHandler)FacesContext.
+                   getCurrentInstance().getApplication().getNavigationHandler();
+           
+             configurableNavigationHandler.performNavigation("DspTicket?faces-redirect=true");
+    	
+    	   	
+    	 
     }  
     
 	public String searchbyinfo() {
@@ -99,12 +112,12 @@ public class JsfDspResult  implements  Serializable {
 	}
 
 	public TicketExtended getRowData(String arg0) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 	public Object getRowKey(TicketExtended arg0) {
-		// TODO Auto-generated method stub
+		
 		System.out.print(arg0);
 		return null;
 	}
