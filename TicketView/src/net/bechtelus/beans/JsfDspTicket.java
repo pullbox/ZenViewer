@@ -17,7 +17,7 @@ import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
 
 @ManagedBean
-public class JsfDspTicket  implements Serializable {
+public class JsfDspTicket implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989494L;
 	private static Zendesk zd;
@@ -26,35 +26,26 @@ public class JsfDspTicket  implements Serializable {
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
 
-	
-
-	
-public Long getTicketID() {
-		return  zenticket.getId();
-}
-
+	public Long getTicketID() {
+		return zenticket.getId();
+	}
 
 	public String getDescription() {
 		return zenticket.getDescription();
 	}
 
-	
 	public String getSubject() {
 		return zenticket.getSubject();
 	}
 
-	
 	public Status getStatus() {
 		return zenticket.getStatus();
 	}
-
-
 
 	public String getGroupName() {
 		return zenticket.getGroupName();
 	}
 
-	
 	public Date getCreatedAt() {
 		return zenticket.getCreatedAt();
 	}
@@ -71,17 +62,20 @@ public Long getTicketID() {
 		return zenticket.getsubmitterName();
 	}
 
-	
 	public List<CommentExtended> getcomments() {
 		return comments;
 	}
-	
+
 	public String getRequesterName() {
 		return zenticket.getRequesterName();
 	}
 
 	public String getAssigneeName() {
 		return zenticket.getAssigneeName();
+	}
+
+	public String getFirstComment() {
+		return comments.get(0).getHtml_body();
 	}
 
 	public String someOtherActionControllerMethod() {
