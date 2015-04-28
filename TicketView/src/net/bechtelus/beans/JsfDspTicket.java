@@ -21,7 +21,7 @@ public class JsfDspTicket  implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989494L;
 	private static Zendesk zd;
-	private Integer ticketID;
+	private Long ticketID;
 	private Ticket aticket, selectedTicket;
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
