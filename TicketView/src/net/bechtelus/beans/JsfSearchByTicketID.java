@@ -1,15 +1,18 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
-import org.omnifaces.util.Faces;
 import org.zendesk.client.v2.model.Ticket;
 
 @ManagedBean
+@RequestScoped
 public class JsfSearchByTicketID extends Ticket implements Serializable {
 
+	
+	
 	private static final long serialVersionUID = 7778841766245989495L;
 
 	private String ticketID;
@@ -22,13 +25,13 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 		this.ticketID = ticketid;
 	}
 
-	public String showTicket() {
+	/*public String showTicket() {
 		if (!ticketID.isEmpty()) {
 			Faces.setSessionAttribute("ticketID", Long.parseLong(ticketID));
 		}
 		return ("DspTicket"); // Means to go to page-b.xhtml (since condition
 								// is not mapped in faces-config.xml)
-	}
+	}*/
 
 	public String someOtherActionControllerMethod() {
 		return ("SearchByTicketID"); // Means to go to index.xhtml (since
@@ -44,7 +47,16 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 
 	@PostConstruct
 	public void init() {
+	log("init");
+	}
+
+	
+	
+	private void log(String a) {
+		System.out.println(getClass().getName() + " "  + a);
 
 	}
 
 }
+	
+

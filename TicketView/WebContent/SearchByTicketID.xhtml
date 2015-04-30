@@ -17,12 +17,16 @@
 							class="fa fa-search fa-2x"></i></span>
 						<p:inputText id="ticketID" value="#{jsfSearchByTicketID.ticketID}"
 							required="true" label="ticketID"
-							validator="#{ticketValidator.ticketExists}" placeholder="Ticket ID">
+							validator="#{ticketValidator.ticketExists}"
+							placeholder="Ticket ID">
 						</p:inputText>
 						<p:message for="ticketID" />
 
 						<f:facet name="footer">
-							<h:commandButton value="Search" action="#{jsfSearchByTicketID.showTicket}" />
+							<h:commandButton value="Search" action="#{jsfDspTicket.SearchAction}">
+								<f:param name="id"
+									value="#{jsfSearchByTicketID.ticketID}" />
+							</h:commandButton>
 						</f:facet>
 
 

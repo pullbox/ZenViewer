@@ -10,18 +10,24 @@ import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
 
-import org.omnifaces.util.Faces;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
 
 @ManagedBean
+@RequestScoped
 public class JsfDspTicket implements Serializable {
+
+	/*
+	 * @ManagedProperty("#{param.theTicketID}") String theTicketID;
+	 */
 
 	private static final long serialVersionUID = 7778841766245989494L;
 	private static Zendesk zd;
-	private Long ticketID;
+
+	private String theTicketID;
 	private Ticket aticket, selectedTicket;
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
@@ -92,16 +98,37 @@ public class JsfDspTicket implements Serializable {
 
 	@PostConstruct
 	public void init() {
+
+		log("init");
+
+	}
+
+	public void SearchAction() {
+		log("searchbutton method");
+
+		theTicketID = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		
+		log("theTicketID: " + theTicketID);
 		zd = APIAccessObject.getAPIAccessObject();
-		ticketID = null;
-		ticketID = Faces.getSessionAttribute("ticketID");
+
 		aticket = null;
 		zenticket = null;
 		comments = null;
-		aticket = zd.getTicket(ticketID);
+		aticket = zd.getTicket(Long.parseLong(theTicketID));
 		zenticket = new TicketExtended(aticket);
 		comments = zenticket.getComments();
+	}
 
+	private void log(String a) {
+		System.out.println(getClass().getName() + " " + a);
+	}
+
+	public String gettheTicketID() {
+		return theTicketID;
+	}
+
+	public void settheTicketID(String aticketID) {
+		this.theTicketID = aticketID;
 	}
 
 }
