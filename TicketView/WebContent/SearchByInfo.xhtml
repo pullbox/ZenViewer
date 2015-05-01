@@ -2,37 +2,36 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
-	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui"
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
-		
 
-			<h:form>
-				<div align="center">
-					
-					<h:panelGrid columns="2" cellpadding="1">
-						<div id="search group">
-							<span class="input-group-addon"><i
-								class="fa fa-search fa-2x"></i></span>
-							<p:inputText id="searchTerm"
-								value="#{jsfSearchByInfo.searchTerm}" required="true"
-								label="searchTerm" placeholder="Search Term">
-							</p:inputText>
-							<p:message for="searchTerm" />
 
+		<h:form>
+			<div align="center">
+
+				<h:panelGrid columns="2" cellpadding="1">
+					<div id="search group">
+						<span class="input-group-addon"><i
+							class="fa fa-search fa-2x"></i></span>
+						<p:inputText id="searchTerm" value="#{jsfSearchByInfo.searchTerm}"
+							required="true" label="searchTerm" placeholder="Search Term">
+						</p:inputText>
+						<p:message for="searchTerm" />
+
+					</div>
+					<f:facet name="footer">
+						<div align="center">
+							<p:button value="Search"
+								outcome="DspResult?searchTerm=#{jsfSearchByInfo.searchTerm}">
+							</p:button>
 						</div>
-						<f:facet name="footer">
-							<div align="center">
-								<h:commandButton value="Search"
-									action="#{jsfSearchByInfo.showSearchResults}" />
-							</div>
-						</f:facet>
-					</h:panelGrid>
-				</div>
-			</h:form>
+					</f:facet>
+				</h:panelGrid>
+			</div>
+		</h:form>
 
-		
+
 	</ui:define>
 </ui:composition>
