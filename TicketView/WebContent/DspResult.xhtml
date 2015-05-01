@@ -2,35 +2,38 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
-	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui" 
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="searchTerm" value="#{jsfDspResult.searchTerm}" />
+			<f:viewAction action="#{jsfDspResult.init}" />
+		</f:metadata>
 
 		<h:form id="form">
 			<p:growl id="msgs" showDetail="true" />
 			<p:dataTable var="ticketextended" value="#{jsfDspResult.tickets}"
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
-				rowKey="#{ticketextended.id}"
-				dblClickSelect="true">
-				
-		<p:ajax event="rowSelect" listener="#{jsfDspResult.onRowSelect}" />  
-				
-				<p:column colspan="1"  style="text-align:center">
-					<h:outputText value="#{ticketextended.id}" />
-				</p:column>
-				<p:column colspan="1"   style="text-align:center">
-					<h:outputText value="#{ticketextended.status}" />
-				</p:column>
-				<p:column colspan="2"  >
-					<h:outputText value="#{ticketextended.organizationName}" />
-				</p:column>
-				<p:column colspan="8" >
-					<h:outputText value="#{ticketextended.subject}" />
-				</p:column>
+				rowKey="#{ticketextended.id}" dblClickSelect="true">
 
-			
+			<p:ajax event="rowSelect" listener="#{jsfDspResult.onRowSelect}" />
+
+					<p:column colspan="1" style="text-align:center">
+						<h:outputText value="#{ticketextended.id}" />
+					</p:column>
+					<p:column colspan="1" style="text-align:center">
+						<h:outputText value="#{ticketextended.status}" />
+					</p:column>
+					<p:column colspan="2">
+						<h:outputText value="#{ticketextended.organizationName}" />
+					</p:column>
+					<p:column colspan="8">
+						<h:outputText value="#{ticketextended.subject}" />
+					</p:column>
+		
+
 			</p:dataTable>
 		</h:form>
 	</ui:define>
