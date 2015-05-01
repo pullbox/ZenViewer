@@ -18,11 +18,13 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 	private String ticketID;
 
 	public String getTicketID() {
+		log("get: " + ticketID);
 		return ticketID;
 	}
 
 	public void setTicketID(String ticketid) {
 		this.ticketID = ticketid;
+		log("set: " + this.ticketID);
 	}
 
 	/*public String showTicket() {
