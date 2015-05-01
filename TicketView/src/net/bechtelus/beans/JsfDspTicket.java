@@ -103,7 +103,7 @@ public class JsfDspTicket implements Serializable {
 
 	}
 
-	public void SearchAction() {
+/*	public void SearchAction(String theTicketID) {
 		log("searchbutton method");
 
 		theTicketID = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -117,18 +117,29 @@ public class JsfDspTicket implements Serializable {
 		aticket = zd.getTicket(Long.parseLong(theTicketID));
 		zenticket = new TicketExtended(aticket);
 		comments = zenticket.getComments();
-	}
+	}*/
 
 	private void log(String a) {
 		System.out.println(getClass().getName() + " " + a);
 	}
 
 	public String gettheTicketID() {
+		log("get: " + theTicketID);
 		return theTicketID;
 	}
 
 	public void settheTicketID(String aticketID) {
 		this.theTicketID = aticketID;
+		log("setter: " + theTicketID);
+		zd = APIAccessObject.getAPIAccessObject();
+
+		aticket = null;
+		zenticket = null;
+		comments = null;
+		aticket = zd.getTicket(Long.parseLong(theTicketID));
+		zenticket = new TicketExtended(aticket);
+		comments = zenticket.getComments();
+		
 	}
 
 }
