@@ -23,10 +23,10 @@
 						<p:message for="ticketID" />
 
 						<f:facet name="footer">
-							<h:commandButton value="Search" action="#{jsfDspTicket.SearchAction}">
-								<f:param name="id"
-									value="#{jsfSearchByTicketID.ticketID}" />
-							</h:commandButton>
+							<p:button value="Search" outcome="DspTicket?theTicketID=#{jsfSearchByTicketID.ticketID}">	
+							<f:viewParam name="theTicketID" value="#{jsfSearchByTicketID.ticketID}" />
+								
+							</p:button>
 						</f:facet>
 
 
