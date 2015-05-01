@@ -7,7 +7,12 @@
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
-
+	
+			<f:metadata>
+				<f:viewParam name="theTicketID" value="#{jsfDspTicket.theTicketID}" />
+				<f:viewAction action="#{jsfDspTicket.init}" />
+			</f:metadata>
+	
 		<p:fieldset>
 			<h:form>
 				<p:panelGrid columns="2">
@@ -94,9 +99,9 @@
 							action="#{jsfDspTicket.searchbyticketid}" />
 					</f:facet>
 				</p:panelGrid>
-			
-</h:form>
-</p:fieldset>
+
+			</h:form>
+		</p:fieldset>
 
 	</ui:define>
 </ui:composition>
