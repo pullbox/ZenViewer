@@ -72,7 +72,7 @@ public class JsfDspResult implements Serializable {
 		// mapped in faces-config.xml)
 	}
 
-	public void onRowSelect(SelectEvent event) {
+	public void onDblClick(SelectEvent event) {
 		@SuppressWarnings("unused")
 		String test = "test";
 		Long id = ((TicketExtended) event.getObject()).getId();
