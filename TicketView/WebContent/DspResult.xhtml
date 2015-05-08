@@ -18,7 +18,7 @@
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
 				rowKey="#{ticketextended.id}" dblClickSelect="true">
 
-			<p:ajax event="rowSelect" listener="#{jsfDspResult.onRowSelect}" />
+			<p:ajax event="rowDblselect" listener="#{jsfDspResult.onDblClick}" />
 
 					<p:column colspan="1" style="text-align:center">
 						<h:outputText value="#{ticketextended.id}" />
