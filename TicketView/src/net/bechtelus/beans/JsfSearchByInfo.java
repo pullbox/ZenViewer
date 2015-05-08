@@ -4,8 +4,6 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
-import org.omnifaces.util.Faces;
-
 @ManagedBean
 public class JsfSearchByInfo implements Serializable {
 
@@ -21,13 +19,6 @@ public class JsfSearchByInfo implements Serializable {
 		this.searchTerm = searchterm;
 	}
 
-	public String showSearchResults() {
-		if (!searchTerm.isEmpty()) {
-			Faces.setSessionAttribute("searchTerm", searchTerm);
-		}
-		return ("DspResult"); // Means to go to page-b.xhtml (since condition
-								// is not mapped in faces-config.xml)
-	}
 
 	public String someOtherActionControllerMethod() {
 		return ("SearchByInfo"); // Means to go to index.xhtml (since
