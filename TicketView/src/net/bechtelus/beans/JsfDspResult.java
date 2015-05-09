@@ -19,6 +19,7 @@ import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Ticket;
 
 @ManagedBean
+@RequestScoped
 public class JsfDspResult implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989495L;

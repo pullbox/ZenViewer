@@ -1,10 +1,12 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
 @ManagedBean
+@RequestScoped
 public class JsfSearchByInfo implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989495L;
