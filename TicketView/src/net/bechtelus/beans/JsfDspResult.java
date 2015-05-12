@@ -1,13 +1,16 @@
 package net.bechtelus.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.bechtelus.extended.model.TicketExtended;
 import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
@@ -18,14 +21,21 @@ import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Ticket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@ManagedBean(eager=true)
+
+
+
+
+@ManagedBean(eager = true)
 @RequestScoped
 public class JsfDspResult implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989495L;
 	private static Zendesk zd;
 	private String theTicketID;
+	private static Logger logger;
 	private String searchTerm;
 	private TicketExtended zenticket, selectedTicket;
 	private List<TicketExtended> tickets;
@@ -75,29 +85,32 @@ public class JsfDspResult implements Serializable {
 		// mapped in faces-config.xml)
 	}
 
-/*	public void onDblClick(SelectEvent event) {
-		
-		
-		 FacesMessage msg = new FacesMessage("Ticket Selected", ((TicketExtended) event.getObject()).getId().toString());
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
-	       log("msg ");
-		
-		
-		@SuppressWarnings("unused")
-		String test = "test";
-		Long id = ((TicketExtended) event.getObject()).getId();
-
-		log("onDblselect: " + id);
-
-		theTicketID = id.toString();
-
-		ConfigurableNavigationHandler configurableNavigationHandler = (ConfigurableNavigationHandler) FacesContext
-				.getCurrentInstance().getApplication().getNavigationHandler();
-
-		configurableNavigationHandler
-				.performNavigation("DspTicket?faces-redirect=true&includeViewParams=true");
-
-	}*/
+	/*
+	 * public void onDblClick(SelectEvent event) {
+	 * 
+	 * 
+	 * FacesMessage msg = new FacesMessage("Ticket Selected", ((TicketExtended)
+	 * event.getObject()).getId().toString());
+	 * FacesContext.getCurrentInstance().addMessage(null, msg); log("msg ");
+	 * 
+	 * 
+	 * @SuppressWarnings("unused") String test = "test"; Long id =
+	 * ((TicketExtended) event.getObject()).getId();
+	 * 
+	 * log("onDblselect: " + id);
+	 * 
+	 * theTicketID = id.toString();
+	 * 
+	 * ConfigurableNavigationHandler configurableNavigationHandler =
+	 * (ConfigurableNavigationHandler) FacesContext
+	 * .getCurrentInstance().getApplication().getNavigationHandler();
+	 * 
+	 * configurableNavigationHandler
+	 * .performNavigation("DspTicket?faces-redirect=true&includeViewParams=true"
+	 * );
+	 * 
+	 * }
+	 */
 
 	public String searchbyinfo() {
 		return ("SearchByInfo"); // Means to go to index.xhtml (since
@@ -107,19 +120,23 @@ public class JsfDspResult implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		log("init");
-
+		
+		this.logger = LoggerFactory.getLogger(JsfDspResult.class);
+	
+	
+		logger.debug("Init: " + time());
 		searchTerm = null;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		this.searchTerm = facesContext.getExternalContext()
 				.getRequestParameterMap().get("searchTerm");
-
-		log("seachTerm: " + this.searchTerm);
-
+		
+		logger.debug("seachTerm: " + this.searchTerm);
+		logger.debug("before zd: " + time());
 		zd = APIAccessObject.getAPIAccessObject();
-
+		logger.debug("after zd: " + time());
 		tickets = null;
 		tickets = new ArrayList<TicketExtended>();
+		logger.debug("before for: " + time());
 		for (Ticket ticket : zd.getTicketsFromSearch(this.searchTerm)) {
 			// System.out.println("Body: " + comment.getBody());
 			TicketExtended ticketextended = null;
@@ -127,6 +144,13 @@ public class JsfDspResult implements Serializable {
 			tickets.add(ticketextended);
 
 		}
+		logger.debug("after for: " + time());
+	}
+
+	@PreDestroy
+	public void close() {
+		zd.close();
+		log("destroyed");
 	}
 
 	public TicketExtended getRowData(String arg0) {
@@ -143,6 +167,13 @@ public class JsfDspResult implements Serializable {
 	private void log(String a) {
 		System.out.println(getClass().getName() + " " + a);
 
+	}
+
+	private String time() {
+
+		String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss")
+				.format(new Date());
+		return timestamp;
 	}
 
 }

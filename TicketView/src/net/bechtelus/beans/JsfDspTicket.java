@@ -9,9 +9,12 @@ import net.bechtelus.extended.model.TicketExtended;
 import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
@@ -31,6 +34,7 @@ public class JsfDspTicket implements Serializable {
 	private Ticket aticket, selectedTicket;
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
+	private static Logger logger;
 
 	public Long getTicketID() {
 		return zenticket.getId();
@@ -99,47 +103,54 @@ public class JsfDspTicket implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		log("init");
-
-	}
-
-/*	public void SearchAction(String theTicketID) {
-		log("searchbutton method");
-
-		theTicketID = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		
-		log("theTicketID: " + theTicketID);
+		this.logger = LoggerFactory.getLogger(JsfDspTicket.class);
+		logger.info("Init");
 		zd = APIAccessObject.getAPIAccessObject();
-
-		aticket = null;
-		zenticket = null;
-		comments = null;
-		aticket = zd.getTicket(Long.parseLong(theTicketID));
-		zenticket = new TicketExtended(aticket);
-		comments = zenticket.getComments();
-	}*/
-
-	private void log(String a) {
-		System.out.println(getClass().getName() + " " + a);
 	}
+
+	@PreDestroy
+	public void close() {
+		zd.close();
+		logger.info("destroyed");
+	}
+
+	/*
+	 * public void SearchAction(String theTicketID) {
+	 * log("searchbutton method");
+	 * 
+	 * theTicketID =
+	 * FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap
+	 * ().get("id");
+	 * 
+	 * log("theTicketID: " + theTicketID); zd =
+	 * APIAccessObject.getAPIAccessObject();
+	 * 
+	 * aticket = null; zenticket = null; comments = null; aticket =
+	 * zd.getTicket(Long.parseLong(theTicketID)); zenticket = new
+	 * TicketExtended(aticket); comments = zenticket.getComments(); }
+	 */
+
 
 	public String gettheTicketID() {
-		log("get: " + theTicketID);
+		logger.info("get: " + theTicketID);
 		return theTicketID;
 	}
 
 	public void settheTicketID(String aticketID) {
 		this.theTicketID = aticketID;
-		log("setter: " + theTicketID);
-		zd = APIAccessObject.getAPIAccessObject();
+		logger.info("setter: " + theTicketID);
 
 		aticket = null;
 		zenticket = null;
 		comments = null;
+		logger.info("zd close? " + zd.isClosed());
+		zd = APIAccessObject.getAPIAccessObject();
 		aticket = zd.getTicket(Long.parseLong(theTicketID));
 		zenticket = new TicketExtended(aticket);
 		comments = zenticket.getComments();
-		
+
+		logger.info(zenticket.getCustomFields().toString());
 	}
 
 }

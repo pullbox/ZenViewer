@@ -5,8 +5,11 @@ import java.util.List;
 
 import net.bechtelus.standard.APIAccessObject;
 
+import org.omg.PortableServer.ForwardRequestHelper;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Comment;
+import org.zendesk.client.v2.model.CustomFieldValue;
+import org.zendesk.client.v2.model.Field;
 import org.zendesk.client.v2.model.Group;
 import org.zendesk.client.v2.model.Ticket;
 import org.zendesk.client.v2.model.User;
@@ -14,8 +17,9 @@ import org.zendesk.client.v2.model.User;
 public class TicketExtended extends Ticket {
 	private static Zendesk zd;
 	private static List<CommentExtended> comments;
-
-
+	private static List<CustomFieldValue> cfieldvalues;
+	private static List<Field> cfields;
+	
 	public TicketExtended(Ticket t) {
 		super();
 
@@ -55,6 +59,22 @@ public class TicketExtended extends Ticket {
 		this.setUpdatedAt(t.getUpdatedAt());
 		this.setUrl(t.getUrl());
 		this.setVia(t.getVia());
+		
+		
+		cfieldvalues = this.getCustomFields();
+			
+		cfields = null;
+		cfields = new ArrayList<Field>();
+		
+			for (int i = 0; i < cfieldvalues.size(); i++) {
+				CustomFieldValue cf = cfieldvalues.get(i);
+				long fid = cf.getId();
+				cfields.add(zd.getTicketField(fid));
+				
+				Field f = cfields.get(i);
+				System.out.println("field: " + f.getTitle());
+			}
+		
 
 	}
 
