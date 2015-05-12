@@ -2,7 +2,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui" 
+	xmlns:p="http://primefaces.org/ui"
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
@@ -16,23 +16,27 @@
 			<p:growl id="msgs" showDetail="true" />
 			<p:dataTable var="ticketextended" value="#{jsfDspResult.tickets}"
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
-				rowKey="#{ticketextended.id}" dblClickSelect="true">
+				rowKey="#{ticketextended.id}">
 
-			<p:ajax event="rowDblselect" listener="#{jsfDspResult.onDblClick}" />
 
-					<p:column colspan="1" style="text-align:center">
-						<h:outputText value="#{ticketextended.id}" />
-					</p:column>
-					<p:column colspan="1" style="text-align:center">
-						<h:outputText value="#{ticketextended.status}" />
-					</p:column>
-					<p:column colspan="2">
-						<h:outputText value="#{ticketextended.organizationName}" />
-					</p:column>
-					<p:column colspan="8">
-						<h:outputText value="#{ticketextended.subject}" />
-					</p:column>
-		
+				<p:button value="View"
+					outcome="DspTicket?theTicketID=#{ticketextended.id}">
+					<f:viewParam name="theTicketID" value="#{ticketextended.id}" />
+				</p:button>
+				</p:column>
+				<p:column colspan="1" style="text-align:center">
+					<h:outputText value="#{ticketextended.id}" />
+				</p:column>
+				<p:column colspan="1" style="text-align:center">
+					<h:outputText value="#{ticketextended.status}" />
+				</p:column>
+				<p:column colspan="2">
+					<h:outputText value="#{ticketextended.organizationName}" />
+				</p:column>
+				<p:column colspan="8">
+					<h:outputText value="#{ticketextended.subject}" />
+				</p:column>
+
 
 			</p:dataTable>
 		</h:form>

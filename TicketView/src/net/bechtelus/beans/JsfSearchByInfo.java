@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
-@ManagedBean
+@ManagedBean(eager=true)
 @RequestScoped
 public class JsfSearchByInfo implements Serializable {
 

@@ -7,7 +7,7 @@ import javax.faces.bean.*;
 
 import org.zendesk.client.v2.model.Ticket;
 
-@ManagedBean
+@ManagedBean(eager=true)
 @RequestScoped
 public class JsfSearchByTicketID extends Ticket implements Serializable {
 

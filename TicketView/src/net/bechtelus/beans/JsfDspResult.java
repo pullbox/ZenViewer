@@ -9,6 +9,7 @@ import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -18,7 +19,7 @@ import org.primefaces.event.SelectEvent;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Ticket;
 
-@ManagedBean
+@ManagedBean(eager=true)
 @RequestScoped
 public class JsfDspResult implements Serializable {
 
@@ -41,6 +42,7 @@ public class JsfDspResult implements Serializable {
 
 	public void setSelectedTicket(TicketExtended selectedTicket) {
 		this.selectedTicket = selectedTicket;
+		log("setSelectedTicket " + selectedTicket);
 	}
 
 	public void setSearchTerm(String searchterm) {
@@ -73,12 +75,19 @@ public class JsfDspResult implements Serializable {
 		// mapped in faces-config.xml)
 	}
 
-	public void onDblClick(SelectEvent event) {
+/*	public void onDblClick(SelectEvent event) {
+		
+		
+		 FacesMessage msg = new FacesMessage("Ticket Selected", ((TicketExtended) event.getObject()).getId().toString());
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	       log("msg ");
+		
+		
 		@SuppressWarnings("unused")
 		String test = "test";
 		Long id = ((TicketExtended) event.getObject()).getId();
 
-		log("onRowSelect: " + id);
+		log("onDblselect: " + id);
 
 		theTicketID = id.toString();
 
@@ -88,7 +97,7 @@ public class JsfDspResult implements Serializable {
 		configurableNavigationHandler
 				.performNavigation("DspTicket?faces-redirect=true&includeViewParams=true");
 
-	}
+	}*/
 
 	public String searchbyinfo() {
 		return ("SearchByInfo"); // Means to go to index.xhtml (since
