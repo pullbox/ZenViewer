@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zendesk.client.v2.Zendesk;
+import org.zendesk.client.v2.model.CustomFieldValue;
+import org.zendesk.client.v2.model.Field;
 import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
 
@@ -34,6 +36,8 @@ public class JsfDspTicket implements Serializable {
 	private Ticket aticket, selectedTicket;
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
+	private List<Field> cfields;
+	private List<CustomFieldValue> cfieldvalues;
 	private static Logger logger;
 
 	public Long getTicketID() {
@@ -74,6 +78,13 @@ public class JsfDspTicket implements Serializable {
 
 	public List<CommentExtended> getcomments() {
 		return comments;
+	}
+	
+	public List<Field> getcfields() {
+		return cfields;
+	}
+	public List<CustomFieldValue> getcfieldvalues() {
+		return cfieldvalues;
 	}
 
 	public String getRequesterName() {
@@ -149,7 +160,9 @@ public class JsfDspTicket implements Serializable {
 		aticket = zd.getTicket(Long.parseLong(theTicketID));
 		zenticket = new TicketExtended(aticket);
 		comments = zenticket.getComments();
-
+		cfields = zenticket.getfields();
+		cfieldvalues = zenticket.getcfieldvalues();
+		
 		logger.info(zenticket.getCustomFields().toString());
 	}
 
