@@ -18,11 +18,10 @@
 				selectionMode="single" selection="#{jsfDspResult.selectedTicket}"
 				rowKey="#{ticketextended.id}">
 
-
-				<p:button value="View"
-					outcome="DspTicket?theTicketID=#{ticketextended.id}">
+				<p:column colspan="1" style="text-align:center">		
+				<p:button value="View" outcome="DspTicket?theTicketID=#{ticketextended.id}">
 					<f:viewParam name="theTicketID" value="#{ticketextended.id}" />
-				</p:button>
+					</p:button>
 				</p:column>
 				<p:column colspan="1" style="text-align:center">
 					<h:outputText value="#{ticketextended.id}" />
