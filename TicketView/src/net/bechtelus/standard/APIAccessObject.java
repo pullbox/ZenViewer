@@ -18,7 +18,8 @@ public class APIAccessObject implements Serializable {
 
 	public static Zendesk getAPIAccessObject() {
 
-		if (zd == null) {
+		// zd is null or closed
+		if (zd == null || zd.isClosed()) {
 			config = ZendeskConfig.load();
 
 			Zendesk.Builder builder = new Zendesk.Builder(
