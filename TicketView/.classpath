@@ -22,11 +22,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.8)"/>
-	<classpathentry kind="lib" path="C:/java/Omnifaces/omnifaces-2.0.jar" sourcepath="C:/java/Omnifaces/omnifaces-2.0-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/java/Omnifaces/omnifaces-2.0-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/java/primefaces/primefaces-5.2.jar" sourcepath="C:/java/primefaces/primefaces-5.2-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

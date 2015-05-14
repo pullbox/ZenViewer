@@ -11,14 +11,8 @@ import net.bechtelus.standard.APIAccessObject;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.application.ConfigurableNavigationHandler;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-
-import org.omnifaces.util.Faces;
-import org.primefaces.event.SelectEvent;
 import org.zendesk.client.v2.Zendesk;
 import org.zendesk.client.v2.model.Ticket;
 import org.slf4j.Logger;
@@ -124,27 +118,28 @@ public class JsfDspResult implements Serializable {
 		this.logger = LoggerFactory.getLogger(JsfDspResult.class);
 	
 	
-		logger.debug("Init: " + time());
+		logger.info("Init: " + time());
 		searchTerm = null;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		this.searchTerm = facesContext.getExternalContext()
 				.getRequestParameterMap().get("searchTerm");
 		
-		logger.debug("seachTerm: " + this.searchTerm);
-		logger.debug("before zd: " + time());
+		logger.info("seachTerm: " + this.searchTerm);
+		logger.info("before zd: " + time());
 		zd = APIAccessObject.getAPIAccessObject();
-		logger.debug("after zd: " + time());
+		logger.info("after zd: " + time());
 		tickets = null;
 		tickets = new ArrayList<TicketExtended>();
-		logger.debug("before for: " + time());
+		logger.info("before for: " + time());
 		for (Ticket ticket : zd.getTicketsFromSearch(this.searchTerm)) {
 			// System.out.println("Body: " + comment.getBody());
+			logger.info("read: " + ticket.getId().toString());
 			TicketExtended ticketextended = null;
 			ticketextended = new TicketExtended(ticket);
 			tickets.add(ticketextended);
 
 		}
-		logger.debug("after for: " + time());
+		logger.info("after for: " + time());
 	}
 
 	@PreDestroy

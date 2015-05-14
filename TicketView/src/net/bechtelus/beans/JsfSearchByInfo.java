@@ -5,12 +5,15 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
-@ManagedBean(eager=true)
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@ManagedBean(eager = true)
 @RequestScoped
 public class JsfSearchByInfo implements Serializable {
 
 	private static final long serialVersionUID = 7778841766245989495L;
-
+	private static Logger logger;
 	private String searchTerm;
 
 	public String getSearchTerm() {
@@ -20,7 +23,6 @@ public class JsfSearchByInfo implements Serializable {
 	public void setSearchTerm(String searchterm) {
 		this.searchTerm = searchterm;
 	}
-
 
 	public String someOtherActionControllerMethod() {
 		return ("SearchByInfo"); // Means to go to index.xhtml (since
@@ -36,6 +38,7 @@ public class JsfSearchByInfo implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
+		this.logger = LoggerFactory.getLogger(JsfSearchByInfo.class);
+		logger.info("Init: ");
 	}
 }

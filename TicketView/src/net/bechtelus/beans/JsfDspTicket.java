@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.bechtelus.extended.model.CommentExtended;
+import net.bechtelus.extended.model.FieldDefinition;
 import net.bechtelus.extended.model.TicketExtended;
 import net.bechtelus.standard.APIAccessObject;
 
@@ -36,7 +37,7 @@ public class JsfDspTicket implements Serializable {
 	private Ticket aticket, selectedTicket;
 	private TicketExtended zenticket;
 	private List<CommentExtended> comments;
-	private List<Field> cfields;
+	private FieldDefinition fielddef;
 	private List<CustomFieldValue> cfieldvalues;
 	private static Logger logger;
 
@@ -80,11 +81,13 @@ public class JsfDspTicket implements Serializable {
 		return comments;
 	}
 	
-	public List<Field> getcfields() {
-		return cfields;
-	}
+	
 	public List<CustomFieldValue> getcfieldvalues() {
 		return cfieldvalues;
+	}
+	
+	public List<Field> getFields() {
+		return fielddef.getFields();
 	}
 
 	public String getRequesterName() {
@@ -160,10 +163,11 @@ public class JsfDspTicket implements Serializable {
 		aticket = zd.getTicket(Long.parseLong(theTicketID));
 		zenticket = new TicketExtended(aticket);
 		comments = zenticket.getComments();
-		cfields = zenticket.getfields();
+		fielddef = zenticket.getfieldDef();
 		cfieldvalues = zenticket.getcfieldvalues();
-		
-		logger.info(zenticket.getCustomFields().toString());
+
+		logger.info("field values: " + zenticket.getcfieldvalues().toString());
+		logger.info("custom fields: " + zenticket.getCustomFields().toString());
 	}
 
 }

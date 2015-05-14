@@ -6,7 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 
 import org.zendesk.client.v2.model.Ticket;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @ManagedBean(eager=true)
 @RequestScoped
 public class JsfSearchByTicketID extends Ticket implements Serializable {
@@ -14,17 +15,17 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 	
 	
 	private static final long serialVersionUID = 7778841766245989495L;
-
+	private static Logger logger;
 	private String ticketID;
 
 	public String getTicketID() {
-		log("get: " + ticketID);
+		logger.info("get: " + ticketID);
 		return ticketID;
 	}
 
 	public void setTicketID(String ticketid) {
 		this.ticketID = ticketid;
-		log("set: " + this.ticketID);
+		logger.info("set: " + this.ticketID);
 	}
 
 	/*public String showTicket() {
@@ -49,15 +50,15 @@ public class JsfSearchByTicketID extends Ticket implements Serializable {
 
 	@PostConstruct
 	public void init() {
-	log("init");
+		
+		this.logger = LoggerFactory.getLogger(JsfDspTicket.class);
+		logger.info("Init");
+	
 	}
 
 	
 	
-	private void log(String a) {
-		System.out.println(getClass().getName() + " "  + a);
-
-	}
+	
 
 }
 	

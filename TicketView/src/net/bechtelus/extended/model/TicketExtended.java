@@ -17,8 +17,9 @@ import org.zendesk.client.v2.model.User;
 public class TicketExtended extends Ticket {
 	private static Zendesk zd;
 	private static List<CommentExtended> comments;
-	 static List<CustomFieldValue> cfieldvalues;
-	 static List<Field> cfields;
+	private static List<CustomFieldValue> cfieldvalues;
+	private static List<Field> cfields;
+	 static FieldDefinition fielddef;
 	
 	public TicketExtended(Ticket t) {
 		super();
@@ -60,17 +61,8 @@ public class TicketExtended extends Ticket {
 		this.setUrl(t.getUrl());
 		this.setVia(t.getVia());
 		
-		
-		cfieldvalues = this.getCustomFields();
-			
-		cfields = null;
-		cfields = new ArrayList<Field>();
-		
-			for (int i = 0; i < cfieldvalues.size(); i++) {
-				CustomFieldValue cf = cfieldvalues.get(i);
-				long fid = cf.getId();
-				cfields.add(zd.getTicketField(fid));
-			}
+		fielddef =  FieldDefinition.getinstance();
+	
 		
 
 	}
@@ -83,8 +75,8 @@ public class TicketExtended extends Ticket {
 
 	}
 	
-	public List<Field> getfields() {
-		return cfields;
+	public FieldDefinition getfieldDef() {
+		return fielddef;
 	}
 	public List<CustomFieldValue> getcfieldvalues() {
 		return cfieldvalues;
