@@ -1,4 +1,4 @@
-package net.bechtelus.beans;
+package net.bechtelus.viewbeans;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

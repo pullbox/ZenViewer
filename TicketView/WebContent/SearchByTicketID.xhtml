@@ -2,14 +2,13 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
-	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui"
 	template="/templates/tr-template.xhtml">
 
 	<ui:define name="content">
 
 
-		<h:form>
+		<h:form id="TicketbyID">
 			<div align="center">
 				<h:panelGrid columns="3" cellpadding="1">
 					<div id="search group">
@@ -22,9 +21,13 @@
 						</p:inputText>
 						<p:message for="ticketID" />
 
+						<h:outputText value="#{jsfSearchByTicketID.ticketID}" />
+
 						<f:facet name="footer">
-							<p:button value="View" outcome="DspTicket?theTicketID=#{jsfSearchByTicketID.ticketID}">							
-							</p:button>
+							<p:commandButton id="viewTicket" value="View"
+								action="#{jsfDspTicket.searchAction(jsfSearchByTicketID.ticketID)}"
+								ajax="false" />
+ 
 						</f:facet>
 
 

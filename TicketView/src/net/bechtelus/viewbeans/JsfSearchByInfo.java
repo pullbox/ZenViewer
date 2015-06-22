@@ -1,4 +1,4 @@
-package net.bechtelus.beans;
+package net.bechtelus.viewbeans;
 
 import java.io.Serializable;
 
@@ -17,10 +17,12 @@ public class JsfSearchByInfo implements Serializable {
 	private String searchTerm;
 
 	public String getSearchTerm() {
+		logger.info("get: " + searchTerm);
 		return searchTerm;
 	}
 
 	public void setSearchTerm(String searchterm) {
+		logger.info("set: " + searchterm);
 		this.searchTerm = searchterm;
 	}
 

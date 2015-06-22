@@ -61,7 +61,7 @@ public class TicketExtended extends Ticket {
 		this.setUrl(t.getUrl());
 		this.setVia(t.getVia());
 		
-//		fielddef =  FieldDefinition.getinstance();
+		fielddef =  FieldDefinition.getinstance();
 	
 		
 

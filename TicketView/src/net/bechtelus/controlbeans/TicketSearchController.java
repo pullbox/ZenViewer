@@ -23,7 +23,7 @@ import org.zendesk.client.v2.model.Field;
 import org.zendesk.client.v2.model.Status;
 import org.zendesk.client.v2.model.Ticket;
 
-@ManagedBean(eager=true)
+@ManagedBean(name = "ticketSearchController")
 @RequestScoped
 public class TicketSearchController implements Serializable {
 

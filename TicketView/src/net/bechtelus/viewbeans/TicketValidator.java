@@ -1,4 +1,4 @@
-package net.bechtelus.beans;
+package net.bechtelus.viewbeans;
 
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -43,22 +44,25 @@ public class TicketValidator implements Validator, Serializable {
 			FacesMessage msg = new FacesMessage(
 					"Ticket ID is a 5 to 6 digit numeric number!");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			logger.info("Ticket ID: " + value.toString() + " is not 5 to 6 digits!");
 			throw new ValidatorException(msg);
 		}
 
 	
 		int id = Integer.parseInt((String) value);
 		Ticket ticket = zd.getTicket(id);
-	
+		logger.info("Ticket ID: " + id);
 		if (ticket != null) {
-			FacesMessage msg = new FacesMessage(
+			/*FacesMessage msg = new FacesMessage(
 					"The Zendesk Ticket ID does exist!");
-			msg.setSeverity(FacesMessage.SEVERITY_INFO);
-			throw new ValidatorException(msg);
+			msg.setSeverity(FacesMessage.SEVERITY_INFO);*/
+			logger.info("Ticket ID: " + id + " exists!");
+			//throw new ValidatorException(msg);
 		} else {
 			FacesMessage msg = new FacesMessage(
 					"The Zendesk Ticket ID does not exist!");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			logger.info("Ticket ID: " + id + " does not exist!");
 			throw new ValidatorException(msg);
 		}
 
@@ -73,7 +77,7 @@ public class TicketValidator implements Validator, Serializable {
 
 	@PostConstruct
 	public void init() {
-		this.logger = LoggerFactory.getLogger(JsfDspTicket.class);
+		this.logger = LoggerFactory.getLogger(TicketValidator.class);
 		logger.info("Init");
 		zd = APIAccessObject.getAPIAccessObject();
 	}
